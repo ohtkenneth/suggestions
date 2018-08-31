@@ -1,7 +1,13 @@
+const path = require('path');
 const db = require('../db/db');
 const yelp = require('../helpers/yelp');
 
 module.exports = {
+  index: {
+    get(req, res) {
+      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+    },
+  },
   users: {
     get(req, res) {
       
@@ -36,8 +42,6 @@ module.exports = {
       
       yelp.search(searchTerm, (err, results) => {
         if (err) console.log('ERROR from controller.js search.post()', err), res.end();
-
-        console.log(results.data);
         res.end(JSON.stringify(results.data));
       });
     }

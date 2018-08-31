@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./controller');
 
+router.route('/')
+.get(controller.index.get);
+
 router.route('/users')
 .get(controller.users.get)
 .post(controller.users.post);

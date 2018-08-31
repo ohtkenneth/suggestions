@@ -16,9 +16,8 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs', 'acces
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(express.static(__dirname, '/../client/static'));
+app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(morgan('combined', { stream: accessLogStream }));
-
 app.use(loggerMiddleware);
 app.use('/', router);
 

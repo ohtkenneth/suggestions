@@ -35,8 +35,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watchWebpack": "webpack --mode development --watch",
+    "buildDev": "webpack --mode development",
     "devServer": "nodemon src/server/server.js",
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development"
+    "devReact": "webpack-dev-server --config ./webpack.config.js --mode development"
   },
   "repository": {
     "type": "git",
