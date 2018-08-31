@@ -18,27 +18,36 @@ Once the project moves into development, the press release can be used as a touc
  
 ## Heading ##
   > Name the product in a way the reader (i.e. your target customers) will understand.
+  Suggestions
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  This is for people of all ages who, when traveling, want a simple way of getting great suggestions for the time they are traveling.
 
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-
+  Have you ever felt you wanted a quick way of getting the top things to do in a place you are unfamiliar with? This app will suggest the best things your destination has to offer.
+  
 ## Problem ##
   > Describe the problem your product solves.
+  This solves the complexity people usually experience when looking for activities in a foreign place. Many yelp queries and google searches of different types are needed before one can pinpoint different things to do for different contexes. This app will simplify the process by offering a minimalist ui in which users can browse aggregated content based on category in one, simple app.
 
 ## Solution ##
   > Describe how your product elegantly solves the problem.
+  This app will pull data from yelp and map it to a more simple interface where users can browse content and suggestions more easily.
 
 ## Quote from You ##
   > A quote from a spokesperson in your company.
+  "Traveling simplified".
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
+  Simply input the location you are traveling to view the best things that place has to offer.
 
 ## Customer Quote ##
   > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  "When traveling with friends to a place we are unfamiliar with, it's often difficult to find things to do for different times of the day. Suggestions helps us make decisions easier and quicker. More time to do things than planning!"
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  Choose your next destination and travel with ease.
