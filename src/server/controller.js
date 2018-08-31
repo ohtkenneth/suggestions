@@ -1,5 +1,5 @@
 const db = require('../db/db');
-const yelpApiKey = require('../config/yelp');
+const yelp = require('../helpers/yelp');
 
 module.exports = {
   users: {
@@ -32,7 +32,14 @@ module.exports = {
   search: {
     post(req, res) {
       // use yelp api to get places
-      res.end('send back search data');
+      const { searchTerm } = req.body;
+      
+      yelp.search(searchTerm, (err, results) => {
+        if (err) console.log('ERROR from controller.js search.post()', err), res.end();
+
+        console.log(results.data);
+        res.end(JSON.stringify(results.data));
+      });
     }
-  }
+  },
 };
