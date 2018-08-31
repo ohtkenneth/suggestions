@@ -1,0 +1,31 @@
+{
+  "name": "suggestions",
+  "version": "0.0.1",
+  "description": "This is for people of all ages who, when traveling, want a simple way of getting great suggestions for the time they are traveling.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "mongodb": "^3.1.4",
+    "mongoose": "^5.2.12"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devServer": "nodemon src/server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohtkenneth/suggestions.git"
+  },
+  "author": "Kenneth Oh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ohtkenneth/suggestions/issues"
+  },
+  "homepage": "https://github.com/ohtkenneth/suggestions#readme"
+}
