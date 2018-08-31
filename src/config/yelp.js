@@ -1,3 +1,0 @@
-module.exports = {
-  api_key: 'Ja4HORA2oup0GRL8b7bFqqu7L2_fj81BXbevo1kSBGXhr1faooPEg1Y6kaxxWNquWFb8ilQC4xLHHXjNn9tBwRrWJ11Xa_A21UAXSbCYZMd41fgnlTu8d0rln3OJW3Yx',
-};

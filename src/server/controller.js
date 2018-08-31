@@ -1,4 +1,5 @@
 const db = require('../db/db');
+const yelpApiKey = require('../config/yelp');
 
 module.exports = {
   users: {
