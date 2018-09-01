@@ -8,31 +8,50 @@ module.exports = {
       res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
     },
   },
-  users: {
+  signup: {
     get(req, res) {
-      
+      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
     },
     post(req, res) {
       const userData = req.body;
       db.saveUser(userData)
       .then((msg) => res.end('User saved!'))
-      .catch((err) => console.log('ERROR from controller.js users.save()', err));
+      .catch((err) => {
+        if (err === 'email taken') {
+          res.end('Email taken');
+        } else {
+          console.log('ERROR from controller.js signup.save()', err)
+        }
+      });
     },
   },
   login: {
     get(req, res) {
-      res.end('I should send back login page');
+      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
     },
     post(req, res) {
       const userData = req.body;
+
       db.getUser(userData)
       .then(results => {
         console.log(results);
-        
-        if (results === 'invalid') res.end(results);
-        res.end(results);
+        if (results === 'invalid') {
+          res.end(results);
+        } else {
+          // user authenticated (results === 'success')
+          req.session.isAuth = 'authenticated';
+          console.log(req.session);
+          res.end(results);
+        }
       })
-      .catch(err => console.log('ERROR from controller.js users.get()', err));
+      .catch(err => {
+        if (err == 'invalid') {
+          console.log('invalid!');
+          res.end('invalid');
+        } else {
+          console.log('ERROR from controller.js users.get()', err)
+        }
+      });
     },
   },
   search: {
@@ -60,5 +79,17 @@ module.exports = {
         else res.end(JSON.stringify(autoTerms));
       });
     }
-  }
+  },
+  authenticate: {
+    get(req, res) {
+      if (req.session.isAuthenticated) {
+        res.end(true);
+      }
+      res.end(false);
+    },
+    post(req, res) {
+      req.session.destroy();
+      res.end('signed out');
+    }
+  },
 };

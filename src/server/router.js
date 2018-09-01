@@ -5,11 +5,12 @@ const controller = require('./controller');
 router.route('/')
 .get(controller.index.get);
 
-router.route('/users')
-.get(controller.users.get)
-.post(controller.users.post);
+router.route('/signup')
+.get(controller.signup.get)
+.post(controller.signup.post);
 
 router.route('/login')
+.get(controller.login.get)
 .post(controller.login.post);
 
 router.route('/search')
@@ -17,5 +18,8 @@ router.route('/search')
 
 router.route('/autocomplete')
 .post(controller.autocomplete.post);
+
+router.route('/authenticate')
+.get(controller.authenticate.get);
 
 module.exports = router;

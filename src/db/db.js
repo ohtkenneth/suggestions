@@ -25,25 +25,38 @@ const saveUser = (userData) => {
   return new Promise((resolve, reject) => {
     const newUser = new UserModel(userData);
     newUser.save((err, savedUser) => {
-      if (err) reject(err);
-
-      resolve(savedUser);
+      if (err) {
+        // check if email already taken
+        if (err.code === 11000) {
+          reject('email taken');
+        } else {
+          reject(err);
+        }
+      } else {
+        resolve(savedUser);
+      }
     });
   });
 };
 
 const getUser = ({ email, password }) => {
   // get user
+  console.log('from get user', email, password)
   return new Promise((resolve, reject) => {
     UserModel.findOne({ email }, (err, results) => {
       if (err) reject(err);
-    
-      // check if password matches
-      if (results.password !== password) {
-        resolve('invalid');
+
+      // check if not found
+      if (!results) {
+        reject('invalid');
+      } else {
+        // check if password matches
+        if (results.password !== password) {
+          reject('invalid');
+        }
+        // correct password / email
+        resolve('success');
       }
-      // correct password / email
-      resolve('success');
     });
   });
 };

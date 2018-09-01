@@ -6,13 +6,20 @@ import CategoryGrid from './CategoryGrid';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
+   
     this.state = {
       categories: [],
+      authenticated: false,
     };
     this.search = this.search.bind(this);
   }
-
+  componentDidMount() {
+    // axios.get('/login')
+    // .then(result => result === 'authenticated' 
+    //   ? this.setState({ authenticated : true }) 
+    //   : this.setState({ authenticated: false }))
+    // .catch(err => console.log(err));
+  }
   search(searchTerm) {
     // post to server
     axios.post('/search', { searchTerm })

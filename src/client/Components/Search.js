@@ -23,7 +23,7 @@ class Search extends React.Component {
       axios.post('/autocomplete', { text: e.target.value })
       .then(autoTerms => {
         this.setState({ 
-          autocomplete: this.state.autocomplete.concat(autoTerms.data),
+          autocomplete: autoTerms.data,
         });
 
         console.log(this.state);
@@ -39,7 +39,7 @@ class Search extends React.Component {
             <input id="searchInput" className="form-control" type="text" onChange={ this.onInputChange } list="autocompleteData"/>
             <datalist id="autocompleteData">
               {
-                this.state.autocomplete.map(term => <option>{ term }</option>)
+                this.state.autocomplete.map((term, index)=> <option key={ index }>{ term }</option>)
               }
             </datalist>
             <button type="button" onClick={ this.onSearch }>Search!</button>

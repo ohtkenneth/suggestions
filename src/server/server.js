@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const session = require('express-session');
 
 /* own modules */
 const router = require('./router');
@@ -19,6 +20,15 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(loggerMiddleware);
+app.use(session({
+  secret: 'cat',
+  resave: false,
+  saveUninitialized: true,
+}))
+app.use((req, res, next) => {
+  console.log(req.session);
+  next();
+});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
