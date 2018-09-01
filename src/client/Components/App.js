@@ -4,6 +4,7 @@ import Search from './Search';
 import SavedList from './SavedList';
 import axios from 'axios';
 import CategoryGrid from './CategoryGrid';
+import './styles/App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -37,17 +38,27 @@ class App extends React.Component {
       </div>
     )
   }
+  logout() {
+    axios.post('/logout');
+    return (
+      <Redirect to="/login"></Redirect>
+    );
+  }
   render() {
     return (
       <BrowserRouter>
         <div>
-          <Link to="/search">Search</Link>
-          <Link to="/save">Saved</Link>
-
-          <Redirect to="/search" />
           <div className="home-nav">
+            <Link to="/search">Search</Link>
+            <Link to="/save">Saved</Link>
+            {/* <button className="btn btn-danger" onClick={ () => axios.post('/signout')}>Signout</button> */}
+            <Link to="/logout">Logout</Link>
+          </div>
+          <Redirect to="/search" />
+          <div>
             <Route path="/search" component={ this.searchPage }/>
             <Route path="/save" component={ SavedList }/>
+            <Route path="/logout" component= { this.logout }/>
           </div>
         </div>
         

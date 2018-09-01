@@ -1,5 +1,6 @@
 .category-grid {
   display: flex;
   flex-wrap: wrap;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
+  padding: 25px;
 }

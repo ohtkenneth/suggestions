@@ -33,4 +33,8 @@ router.route('/save')
 .get(controller.save.get)
 .post(controller.save.post);
 
+router.route('/logout')
+.get(controller.logout.get)
+.post(controller.logout.post);
+
 module.exports = router;

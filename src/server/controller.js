@@ -27,7 +27,8 @@ module.exports = {
   },
   login: {
     get(req, res) {
-      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+      // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+      res.redirect('/');
     },
     post(req, res) {
       const userData = req.body;
@@ -42,7 +43,9 @@ module.exports = {
           req.session.isAuthenticated = true;
           req.session.email = userData.email;
           console.log(req.session);
-          res.end(results);
+          // res.end(results);
+          // res.redirect('/', 201);
+          res.redirect(201, '/search')
         }
       })
       .catch(err => {
@@ -57,7 +60,8 @@ module.exports = {
   },
   search: {
     get(req, res) {
-      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+      // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+      res.redirect('/');
     },
     post(req, res) {
       // use yelp api to get places
@@ -112,7 +116,8 @@ module.exports = {
     get(req, res) {
       // email is on session
       if (!req.session.isAuthenticated) {
-        res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+        // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+        res.redirect('/')
       } else {
         db.getSavedItems({ email: req.session.email})
         .then(savedItems => res.end(JSON.stringify(savedItems)))
@@ -131,4 +136,13 @@ module.exports = {
       })
     }
   },
+  logout: {
+    get(req, res) {
+      res.redirect(200, '/');
+    },
+    post(req, res) {
+      req.session.destroy();
+      res.redirect(201, '/');
+    },
+  }
 };

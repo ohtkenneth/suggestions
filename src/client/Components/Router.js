@@ -56,11 +56,14 @@ class Router extends React.Component {
       console.log('redirect to login');
       return (
         <BrowserRouter>
-        <div className="landing-page">          
+        <div className="landing-page">
+          <br/>
+          <br/>
+          <h1>Suggestions</h1>       
           <div className="nav">
             <br/>
             <br/>
-            
+               
             {/* <Link to="/home">Home</Link> */}
           </div>
           <br/>

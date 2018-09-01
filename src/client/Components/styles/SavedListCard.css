@@ -5,7 +5,9 @@
   padding: 15px;
   border: 1px solid black;
   border-radius: 10px;
-  min-width: 200px;
+  width: 250px;
+  height: 250px;
+  margin: 15px 15px 15px 15px;
 }
 
 .saved-img {
@@ -14,7 +16,7 @@
 }
 
 .saved-link {
-  font-size: 35px;
+  font-size: 20px;
   color: skyblue;
 }
 

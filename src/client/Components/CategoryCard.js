@@ -4,9 +4,9 @@ import './styles/CategoryCard.css';
 
 // category: string, items: []
 const CategoryCard = ({ category, items }) => {
+  console.log(items);
   return (
     <div className="category-card">
-      <h4>{ category }</h4>
       {
         items.map((item) => <CategoryItem key={ item.id } category={ category } item= { item } />)
       }

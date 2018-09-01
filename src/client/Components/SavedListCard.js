@@ -5,11 +5,11 @@ const SavedListCard = (props) => {
   console.log(props);
   return (
     <div className="saved-card">
-      <a className="saved-link" href={ props.url }>{ props.name }</a>
+      <a className="saved-link" href={ props.url } target="_blank">{ props.name }</a>
       <p>{ props.imageUrl }</p>
       <img className="saved-img" src={ props.imgUrl }/>
-      <h4>Rating: { props.rating }</h4>
-      <h5>Reviews: {props.reviewCount }</h5>
+      <h6>Rating: { props.rating }</h6>
+      <h6>Reviews: {props.reviewCount }</h6>
     </div>
   )
 };

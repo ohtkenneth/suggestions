@@ -1,4 +1,15 @@
-.item-img {
-  height: 100px;
-  width: 100px;
+.category-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  border: 1px solid black;
+  background-color: #f7f7f7;
+  border-radius: 15px;
+  margin: 10px 0px 10px 0px;
+  padding: 25px;
+}
+
+.category-item-img {
+  height: 200px;
+  width: 200px;
 }

@@ -9,6 +9,7 @@ class Search extends React.Component {
 
     this.state = {
       autocomplete: [],
+      locationAutocomplete: [],
       location: '',
       searchValue: '',
       searchBoxes: [],
@@ -26,6 +27,7 @@ class Search extends React.Component {
   }
   onInputChange(e) {
     let inputValue = e.target.value;
+
     if (e.target.value !== '') {
       // axios(searchOptions); 
       axios.post('/autocomplete', { text: e.target.value })
@@ -39,21 +41,32 @@ class Search extends React.Component {
       })
       .catch(err => console.log(err));
     }
+    // check is keypress is 13
+    console.log(e.key);
+    if (e.keyCode === 13) {
+      this.onSearch();
+    }
   }
   render() {
     return (
-      <div className="search-container">
+      <div className="col-md search-container">
         <form autoComplete="off" action="/search" method="post">
           <div className="form-group">
             <br/>
-            <input id="locationInput" className="form-control" type="text" onChange={ (e) => this.setState({ location: e.target.value })} placeholder="Input location"/>
+            <input id="locationInput" className="form-control" type="text" onChange={ (e) => this.setState({ location: e.target.value })} list="locationAutocompleteData" placeholder="Input location"/>
             <input id="searchInput" className="form-control" type="text" onChange={ this.onInputChange } list="autocompleteData" placeholder="What are you interested in?"/>
             <datalist id="autocompleteData">
               {
                 this.state.autocomplete.map((term, index)=> <option key={ index }>{ term }</option>)
               }
             </datalist>
-            <button type="button" onClick={ this.onSearch }>Search!</button>
+            <datalist id="locationAutocompleteData">
+              {
+                this.state.locationAutocomplete.map((term, index)=> <option key={ index }>{ term }</option>)
+              }
+            </datalist>
+            <br/>
+            <button type="button" onClick={ this.onSearch } className="btn btn-success">Search!</button>
           </div>
         </form>
       </div>

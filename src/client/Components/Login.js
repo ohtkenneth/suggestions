@@ -22,6 +22,7 @@ class Login extends React.Component {
         console.log(results);
         if (results.data === 'invalid') {
           // tell user invalid credentials
+          alert('Wrong username or password');
         } else {
           // log user in
           console.log(results);
@@ -39,7 +40,6 @@ class Login extends React.Component {
 
   render() {
     const isAuthenticated = this.state.isAuthenticated;
-  
     return (
       <div>
         <form>
