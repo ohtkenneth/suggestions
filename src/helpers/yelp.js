@@ -19,23 +19,30 @@ module.exports = {
     .then(results => cb(null, results))
     .catch(err => cb(err, null));
   },
-  autoComplete(input, cb) {
-    // console.log(input);
-    // axios.get('autocomplete', { params: { text: input }})
-    // .then(results => {
-    //   // get aliases, then businesses, then terms
-    //   results = JSON.parse(results);
-    //   let autoTerms = [];
-      
-    //   autoTerms.concat(results.categories.map(category => category.alias));
-    //   autoTerms.concat(results.businesses);
-    //   autoTerms.concat(results.terms);
+  autocomplete(text, cb) {
+    const searchOptions = {
+      url: 'https://api.yelp.com/v3/autocomplete',
+      method: 'get',
+      params: {
+        text,
+      },
+      headers: {
+        Authorization: `Bearer ${yelpApiKey}`,
+      }
+    };
+    console.log('AUTOCOMPLETE')
 
-    //   console.log(autoTerms);
+    axios(searchOptions)
+    .then(results => {
+      // get aliases, then businesses, then terms
+      let autoTerms = [];
+      autoTerms.push(...results.data.categories.map(category => category.alias));
+      autoTerms.push(...results.data.businesses);
+      autoTerms.push(...results.data.terms.map(term => term.text));
 
-    //   cb(null, autoTerms);
-    // })
-    // .catch(err => cb(err, null));
+      cb(null, autoTerms);
+    })
+    .catch(err => cb(err, null));
   },
 };
 

@@ -41,17 +41,24 @@ module.exports = {
       const { searchTerm } = req.body;
 
       yelp.search(searchTerm, (err, results) => {
-        if (err) console.log('ERROR from controller.js search.post()', err), res.end();
+        if (err) {
+          if (err.code === 'LOCATION_NOT_FOUND') {
+            res.end('Location not found!');
+          } else {
+            console.log('ERROR from controller.js search()', err);
+          }
+        }
         res.end(JSON.stringify(results.data));
       });
     },
   },
   autocomplete: {
     post(req, res) {
-      // yelp.autoComplete(e.target.value, (err, autoCompleteTerms) => {
-      //   if (err) console.log('ERROR from contoller.js autocomplete.post()', err);
-      //   else res.end(JSON.stringify(autoCompleteTerms));
-      // });
+      const { text } = req.body;
+      yelp.autocomplete(text, (err, autoTerms) => {
+        if (err) console.log('ERROR from contoller.js autocomplete.post()', err);
+        else res.end(JSON.stringify(autoTerms));
+      });
     }
   }
 };

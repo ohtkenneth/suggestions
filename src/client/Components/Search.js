@@ -11,23 +11,25 @@ class Search extends React.Component {
     };
 
     this.onSearch = this.onSearch.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
   }
   onSearch() {
-    // this.props.search(document.getElementById('searchInput').value);
-    console.log(document.getElementById('searchInput').value);
     this.props.search(document.getElementById('searchInput').value);
+    document.getElementById('searchInput').value = '';
   }
   onInputChange(e) {
-    // console.log(e.target.value);
-    // // get autocomplete
+    if (e.target.value !== '') {
+      // axios(searchOptions); 
+      axios.post('/autocomplete', { text: e.target.value })
+      .then(autoTerms => {
+        this.setState({ 
+          autocomplete: this.state.autocomplete.concat(autoTerms.data),
+        });
 
-    // axios.post('/auto', { term: e.target.value })
-    // .then(results => console.log(results))
-    // .catch(err => console.log('COMING FROM SEARCH', err));
-    
-    // axios.get('https://api.yelp.com/v3/autocomplete', { params: { text: 'eat' }})
-    // .then(results => console.log(results))
-    // .catch(err => console.log('COMING FROM SEARCH', err));
+        console.log(this.state);
+      })
+      .catch(err => console.log(err));
+    }
   }
   render() {
     return (

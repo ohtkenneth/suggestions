@@ -15,10 +15,10 @@ class App extends React.Component {
 
   search(searchTerm) {
     // post to server
-    // console.log('searching', searchTerm);
-    // axios.post('/search', { searchTerm });
     axios.post('/search', { searchTerm })
     .then(results => {
+      console.log(results);
+      // set state to re render with updated categories
       this.setState({
         categories: this.state.categories.concat({ category: searchTerm, items: results.data.businesses})
       });
