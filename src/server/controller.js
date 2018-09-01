@@ -15,7 +15,14 @@ module.exports = {
     post(req, res) {
       const userData = req.body;
       db.saveUser(userData)
-      .then((msg) => res.end('User saved!'))
+      .then((msg) => {
+        req.session.isAuthenticated = true;
+        req.session.email = userData.email;
+        console.log(req.session);
+        // res.redirect('/', 201);
+        // res.redirect(201, '/search')
+        res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+      })
       .catch((err) => {
         if (err === 'email taken') {
           res.end('Email taken');
@@ -43,9 +50,9 @@ module.exports = {
           req.session.isAuthenticated = true;
           req.session.email = userData.email;
           console.log(req.session);
-          // res.end(results);
           // res.redirect('/', 201);
-          res.redirect(201, '/search')
+          // res.redirect(201, '/search')
+          res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
         }
       })
       .catch(err => {
@@ -142,7 +149,8 @@ module.exports = {
     },
     post(req, res) {
       req.session.destroy();
-      res.redirect(201, '/');
+      // res.redirect(201, '/');
+      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
     },
   }
 };

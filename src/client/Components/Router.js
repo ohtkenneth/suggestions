@@ -51,7 +51,7 @@ class Router extends React.Component {
   render() {
     const isAuthenticated = this.state.isAuthenticated;
     console.log('isAuthenticated from render', isAuthenticated);
-
+    
     if (!isAuthenticated) {
       console.log('redirect to login');
       return (
@@ -68,8 +68,10 @@ class Router extends React.Component {
           </div>
           <br/>
           <br/>
-          <Route path="/login" component={ Login } />
-          <Route path="/signup" component={ Signup } /> 
+          {/* <Route path="/login" component={ Login } /> */}
+          <Route path="/login" render={ () => <Login authenticate={this.authenticate}/>}></Route>
+          <Route path="/signup" render={ () => <Signup authenticate={this.authenticate}/>}></Route>
+          {/* <Route path="/signup" component={ Signup } />  */}
           <br/>
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link>
@@ -81,7 +83,7 @@ class Router extends React.Component {
 
     return (
       <div>
-        <App />
+        <App authenticate={ this.authenticate }/>
       </div>
     )
   }

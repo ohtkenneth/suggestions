@@ -39,10 +39,9 @@ class App extends React.Component {
     )
   }
   logout() {
-    axios.post('/logout');
-    return (
-      <Redirect to="/login"></Redirect>
-    );
+    axios.post('/logout')
+    .then(() => this.props.authenticate())
+    .catch(err => console.log(err));
   }
   render() {
     return (

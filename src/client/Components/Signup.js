@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const Signup = () => {
+const Signup = (props) => {
   let email = '';
   let password = '';
   const onSignup = () => {
@@ -9,10 +9,12 @@ const Signup = () => {
       axios.post('/signup', { email, password })
       .then(results => {
         console.log(results);
-        if (results.data === 'invalid') {
+        if (results.data === 'Email taken') {
           // tell user invalid credentials
+          alert('Email taken!');
         } else {
           // redirect to home page
+          props.authenticate();
         }
       })
       .catch(err => console.log('SIGNUP ERROR', err));

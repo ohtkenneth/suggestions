@@ -4,4 +4,4 @@ import 'bootstrap';
 import App from './Components/App';
 import Router from './Components/Router';
 
-ReactDOM.render(<Router/>, document.getElementById('app'));
+ReactDOM.render(<Router />, document.getElementById('app'));

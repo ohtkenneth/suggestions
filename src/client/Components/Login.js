@@ -11,6 +11,7 @@ class Login extends React.Component {
       email: '',
       password: '',
     };
+    console.log(props);
 
     this.onLogin = this.onLogin.bind(this);
   }
@@ -25,10 +26,12 @@ class Login extends React.Component {
           alert('Wrong username or password');
         } else {
           // log user in
-          console.log(results);
+          console.log('redirecing to index');
           this.setState({
             isAuthenticated: true,
           });
+
+          this.props.authenticate();
         } 
       })
       .catch(err => console.log('LOGIN ERROR', err));
