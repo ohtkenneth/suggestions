@@ -40,6 +40,7 @@ module.exports = {
         } else {
           // user authenticated (results === 'success')
           req.session.isAuthenticated = true;
+          req.session.email = userData.email;
           console.log(req.session);
           res.end(results);
         }
@@ -106,5 +107,28 @@ module.exports = {
     get(req, res) {
       res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
     }
-  }
+  },
+  save: {
+    get(req, res) {
+      // email is on session
+      if (!req.session.isAuthenticated) {
+        res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+      } else {
+        db.getSavedItems({ email: req.session.email})
+        .then(savedItems => res.end(JSON.stringify(savedItems)))
+        .catch(err => res.end(JSON.stringify(err)));
+      }
+    },
+    post(req, res) {
+      // email is on session
+      db.saveItem({ email: req.session.email, item: req.body })
+      .then(result => {
+        res.end(JSON.stringify(result));
+      })
+      .catch(err => {
+        console.log('ERROR SAVE ITEM', err);
+        res.send(err);
+      })
+    }
+  },
 };

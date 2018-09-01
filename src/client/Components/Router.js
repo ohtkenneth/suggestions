@@ -58,12 +58,18 @@ class Router extends React.Component {
         <BrowserRouter>
         <div className="landing-page">          
           <div className="nav">
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
+            <br/>
+            <br/>
+            
             {/* <Link to="/home">Home</Link> */}
           </div>
+          <br/>
+          <br/>
           <Route path="/login" component={ Login } />
-          <Route path="/signup" component={ Signup } />
+          <Route path="/signup" component={ Signup } /> 
+          <br/>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
           {/* <Route path="/home" component= { App }/> */}
         </div>
         </BrowserRouter>

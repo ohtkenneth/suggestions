@@ -29,4 +29,8 @@ router.route('/signout')
 router.route('/home')
 .get(controller.home.get);
 
+router.route('/save')
+.get(controller.save.get)
+.post(controller.save.post);
+
 module.exports = router;

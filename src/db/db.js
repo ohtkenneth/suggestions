@@ -12,10 +12,21 @@ const userSchema = new Schema({
     unique: true
   },
   password: String,
+  savedItems: Array,
 });
+
+// const saveItemSchema = new Schema({
+//   email: {
+//     type: String,
+//     required: true,
+//     unique: true,
+//   },
+//   items: Array,
+// });
 
 /***** MODELS ****************************************/
 const UserModel = mongoose.model('Users', userSchema);
+// const SaveItemModel = mongoose.model('SaveItem', saveItemSchema);
 
 /***** user functions ****************************************/
 // All db functions should return promises
@@ -60,12 +71,37 @@ const getUser = ({ email, password }) => {
     });
   });
 };
-
 // saveUser({ email: 'ken@ken.com', password: '123 '})
 // .then(user => console.log('success!'))
 // .catch(err => console.log(err));
 
+const saveItem = ({ email, item }) => {
+  console.log('SAVING', email, item);
+  // item should be object holding category and item data
+  return new Promise((resolve, reject) => {
+    UserModel.updateOne({ email: email }, { $push: { savedItems: item } }, (err, results) => {
+      if (err) {
+        reject(err);
+      }
+      resolve('I AM RESULTS', results);
+    });
+  });
+};
+
+const getSavedItems = ({ email }) => {
+  console.log('getSavedItemsEmail', email);
+  return new Promise((resolve, reject) => {
+    UserModel.findOne({ email }, (err, results) => {
+      if (err) reject(err);
+
+      resolve(results);
+    });
+  });
+};
+
 module.exports = {
   saveUser,
   getUser,
+  saveItem,
+  getSavedItems
 };

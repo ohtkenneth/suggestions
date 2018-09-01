@@ -1,0 +1,23 @@
+.saved-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  padding: 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+  min-width: 200px;
+}
+
+.saved-img {
+  width: 150px;
+  height: 150px;
+}
+
+.saved-link {
+  font-size: 35px;
+  color: skyblue;
+}
+
+.saved-link:hover {
+  color: #75e3ff
+}

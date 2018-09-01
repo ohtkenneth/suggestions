@@ -28,7 +28,7 @@ const Signup = () => {
         <div className="form-control md-8">
           <input type="text" className="form-control" placeholder="email" onChange={ (e) => email = e.target.value }/>
           <input type="text" className="form-control" placeholder="password" onChange={ (e) => password = e.target.value }/>
-          <button type="button" className="btn btn-success" onClick={ onSignup }>Sign up</button>
+          <button type="button" className="btn btn-primary" onClick={ onSignup }>Sign up</button>
         </div>
       </form>
     </div>

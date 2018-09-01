@@ -42,7 +42,7 @@ class Search extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="search-container">
         <form autoComplete="off" action="/search" method="post">
           <div className="form-group">
             <br/>

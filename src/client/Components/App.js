@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Link, Redirect, Route } from 'react-router-dom';
 import Search from './Search';
-import Saved from './Saved';
+import SavedList from './SavedList';
 import axios from 'axios';
 import CategoryGrid from './CategoryGrid';
 
@@ -42,11 +42,13 @@ class App extends React.Component {
       <BrowserRouter>
         <div>
           <Link to="/search">Search</Link>
-          <Link to="/saved">Saved</Link>
+          <Link to="/save">Saved</Link>
 
           <Redirect to="/search" />
-          <Route path="/search" component={ this.searchPage }/>
-          <Route path="/saved" component={ Saved }/>
+          <div className="home-nav">
+            <Route path="/search" component={ this.searchPage }/>
+            <Route path="/save" component={ SavedList }/>
+          </div>
         </div>
         
       </BrowserRouter>
