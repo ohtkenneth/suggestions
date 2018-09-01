@@ -39,11 +39,19 @@ module.exports = {
     post(req, res) {
       // use yelp api to get places
       const { searchTerm } = req.body;
-      
+
       yelp.search(searchTerm, (err, results) => {
         if (err) console.log('ERROR from controller.js search.post()', err), res.end();
         res.end(JSON.stringify(results.data));
       });
-    }
+    },
   },
+  autocomplete: {
+    post(req, res) {
+      // yelp.autoComplete(e.target.value, (err, autoCompleteTerms) => {
+      //   if (err) console.log('ERROR from contoller.js autocomplete.post()', err);
+      //   else res.end(JSON.stringify(autoCompleteTerms));
+      // });
+    }
+  }
 };

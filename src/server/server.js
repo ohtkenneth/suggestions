@@ -19,6 +19,12 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(loggerMiddleware);
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 app.use('/', router);
 
 app.listen(PORT, () => console.log('Suggestions server listening on ' + PORT));

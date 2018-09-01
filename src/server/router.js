@@ -15,4 +15,7 @@ router.route('/login')
 router.route('/search')
 .post(controller.search.post);
 
+router.route('/autocomplete')
+.post(controller.autocomplete.post);
+
 module.exports = router;

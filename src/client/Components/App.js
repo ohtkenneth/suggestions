@@ -15,6 +15,8 @@ class App extends React.Component {
 
   search(searchTerm) {
     // post to server
+    // console.log('searching', searchTerm);
+    // axios.post('/search', { searchTerm });
     axios.post('/search', { searchTerm })
     .then(results => {
       this.setState({
