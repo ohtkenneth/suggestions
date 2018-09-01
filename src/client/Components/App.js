@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Link, Redirect, Route } from 'react-router-dom';
 import Search from './Search';
+import Saved from './Saved';
 import axios from 'axios';
 import CategoryGrid from './CategoryGrid';
 
@@ -12,36 +14,44 @@ class App extends React.Component {
       authenticated: false,
     };
     this.search = this.search.bind(this);
+    this.searchPage = this.searchPage.bind(this);
   }
-  componentDidMount() {
-    // axios.get('/login')
-    // .then(result => result === 'authenticated' 
-    //   ? this.setState({ authenticated : true }) 
-    //   : this.setState({ authenticated: false }))
-    // .catch(err => console.log(err));
-  }
-  search(searchTerm) {
+  search(searchData) {
     // post to server
-    axios.post('/search', { searchTerm })
+    console.log(searchData,'SEARCH FROM APP')
+    axios.post('/search', searchData)
     .then(results => {
       console.log(results);
       // set state to re render with updated categories
       this.setState({
-        categories: this.state.categories.concat({ category: searchTerm, items: results.data.businesses})
+        categories: this.state.categories.concat({ category: searchData.searchValue, items: results.data.businesses})
       });
     })
     .catch(err => console.log('ERROR from App.js search()'));
   }
-  render() {
-    console.log(this.state);
+  searchPage() {
     return (
-      <div>
-        This is the new world
+      <div className="search">
         <Search search={ this.search }/>
         <CategoryGrid categories={ this.state.categories } />
       </div>
     )
   }
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Link to="/search">Search</Link>
+          <Link to="/saved">Saved</Link>
+
+          <Redirect to="/search" />
+          <Route path="/search" component={ this.searchPage }/>
+          <Route path="/saved" component={ Saved }/>
+        </div>
+        
+      </BrowserRouter>
+    );
+  };
 }
 
 export default App;

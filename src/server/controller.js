@@ -39,7 +39,7 @@ module.exports = {
           res.end(results);
         } else {
           // user authenticated (results === 'success')
-          req.session.isAuth = 'authenticated';
+          req.session.isAuthenticated = true;
           console.log(req.session);
           res.end(results);
         }
@@ -55,11 +55,14 @@ module.exports = {
     },
   },
   search: {
+    get(req, res) {
+      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+    },
     post(req, res) {
       // use yelp api to get places
-      const { searchTerm } = req.body;
-
-      yelp.search(searchTerm, (err, results) => {
+      // const { searchTerm } = req.body;
+      // req.body = { searchTerm, location }
+      yelp.search(req.body, (err, results) => {
         if (err) {
           if (err.code === 'LOCATION_NOT_FOUND') {
             res.end('Location not found!');
@@ -80,16 +83,28 @@ module.exports = {
       });
     }
   },
+  signout: {
+    post(req, res) {
+      req.session.destroy()
+      console.log('req session', req.session);
+      res.end('signed out');
+    }
+  },
   authenticate: {
     get(req, res) {
       if (req.session.isAuthenticated) {
-        res.end(true);
+        res.end('true');
       }
-      res.end(false);
+      res.end('false');
     },
     post(req, res) {
       req.session.destroy();
       res.end('signed out');
     }
   },
+  home: {
+    get(req, res) {
+      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+    }
+  }
 };

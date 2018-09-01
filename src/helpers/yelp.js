@@ -3,12 +3,14 @@ const querystring = require('querystring');
 const yelpApiKey = require('../config/yelpConfig');
 
 module.exports = {
-  search(searchTerm, cb) {
+  search(searchData, cb) {
+    console.log('SEARCH DATA', searchData);
     const searchOptions = {
       url: 'https://api.yelp.com/v3/businesses/search',
       method: 'get',
       params: {
-        location: searchTerm,
+        term: searchData.searchValue,
+        location: searchData.location,
       },
       headers: {
         Authorization: `Bearer ${yelpApiKey}`,

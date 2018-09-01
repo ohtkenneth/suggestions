@@ -24,7 +24,8 @@ app.use(session({
   secret: 'cat',
   resave: false,
   saveUninitialized: true,
-}))
+  isAuthenticated: false,
+}));
 app.use((req, res, next) => {
   console.log(req.session);
   next();

@@ -1,56 +1,81 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import App from './App';
 import Login from './Login';
 import Signup from './Signup';
+import './styles/Router.css';
 
-const auth = {
-  isAuthenticated: false,
-  authenticate(cb) {
+class Router extends React.Component { 
+  constructor(props) {
+    super(props);
+    console.log('I am the index router')
+    this.state = {
+      isAuthenticated: false,
+    };
+    this.authenticate = this.authenticate.bind(this);
+  }
+  componentDidMount() {
+    console.log('should auth now')
+    this.authenticate();
+  }
+  authenticate() {
     axios.get('/authenticate')
     .then(isAuthenticated => {
-      console.log(isAuthenticated);
-      this.isAuthenticated = isAuthenticated;
+      console.log('IS AUTH', isAuthenticated.data, typeof isAuthenticated.data)
+      if (isAuthenticated.data === true) {
+        this.setState({
+          isAuthenticated: true,
+        });
+      } else {
+        this.setState({
+          isAuthenticated: false,
+        });
+      }
     })
     .catch(err => {
       console.log('ERROR from auth router.js', err);
     })
-  },
+  }
   signout(cb) {
-    this.isAuthenticated = false;
     console.log('sign out');
-    axios.post('/authenticate')
+    axios.post('/signout')
     .then(response => {
       console.log(response);
+      this.setState({
+        isAuthenticated: false,
+      });
     })
     .catch(err => console.log(err));
   }
-}
+  render() {
+    const isAuthenticated = this.state.isAuthenticated;
+    console.log('isAuthenticated from render', isAuthenticated);
 
-const Authenticate = () => {
-  return (
-    <Router>
-      <div>
-        <ul>
-          <li>
+    if (!isAuthenticated) {
+      console.log('redirect to login');
+      return (
+        <BrowserRouter>
+        <div className="landing-page">          
+          <div className="nav">
             <Link to="/login">Login</Link>
             <Link to="/signup">Signup</Link>
-          </li>
-        </ul>
-        <Route path="/login" component={ Login } />
-        <Route path="/signup" component={ Signup } />
-        {/* <PrivateRoute path="/home" component={App}/> */}
-        <button onClick={ auth.signout() }></button>
+            {/* <Link to="/home">Home</Link> */}
+          </div>
+          <Route path="/login" component={ Login } />
+          <Route path="/signup" component={ Signup } />
+          {/* <Route path="/home" component= { App }/> */}
+        </div>
+        </BrowserRouter>
+      )
+    }
+
+    return (
+      <div>
+        <App />
       </div>
-    </Router>
-  )
-};
+    )
+  }
+}
 
-// const Private = () => {
-//   return (
-    
-//   )
-// }
-
-export default Authenticate;
+export default Router;

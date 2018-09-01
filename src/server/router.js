@@ -14,6 +14,7 @@ router.route('/login')
 .post(controller.login.post);
 
 router.route('/search')
+.get(controller.search.get)
 .post(controller.search.post);
 
 router.route('/autocomplete')
@@ -21,5 +22,11 @@ router.route('/autocomplete')
 
 router.route('/authenticate')
 .get(controller.authenticate.get);
+
+router.route('/signout')
+.post(controller.signout.post);
+
+router.route('/home')
+.get(controller.home.get);
 
 module.exports = router;
