@@ -53,8 +53,8 @@ class Search extends React.Component {
         <form autoComplete="off" action="/search" method="post">
           <div className="form-group">
             <br/>
-            <input id="locationInput" className="form-control" type="text" onChange={ (e) => this.setState({ location: e.target.value })} list="locationAutocompleteData" placeholder="Input location"/>
-            <input id="searchInput" className="form-control" type="text" onChange={ this.onInputChange } list="autocompleteData" placeholder="What are you interested in?"/>
+            <input id="locationInput" className="form-control" type="text" onChange={ (e) => this.setState({ location: e.target.value })} list="locationAutocompleteData" placeholder="Where to?"/>
+            <input id="searchInput" className="form-control" type="text" onChange={ this.onInputChange } list="autocompleteData" placeholder="What's happening?"/>
             <datalist id="autocompleteData">
               {
                 this.state.autocomplete.map((term, index)=> <option key={ index }>{ term }</option>)

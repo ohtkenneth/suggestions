@@ -4,6 +4,7 @@ import Search from './Search';
 import SavedList from './SavedList';
 import axios from 'axios';
 import CategoryGrid from './CategoryGrid';
+import Logout from './Logout';
 import './styles/App.css';
 
 class App extends React.Component {
@@ -12,14 +13,13 @@ class App extends React.Component {
    
     this.state = {
       categories: [],
-      authenticated: false,
     };
+
     this.search = this.search.bind(this);
     this.searchPage = this.searchPage.bind(this);
   }
   search(searchData) {
     // post to server
-    console.log(searchData,'SEARCH FROM APP')
     axios.post('/search', searchData)
     .then(results => {
       console.log(results);
@@ -38,11 +38,6 @@ class App extends React.Component {
       </div>
     )
   }
-  logout() {
-    axios.post('/logout')
-    .then(() => this.props.authenticate())
-    .catch(err => console.log(err));
-  }
   render() {
     return (
       <BrowserRouter>
@@ -50,14 +45,13 @@ class App extends React.Component {
           <div className="home-nav">
             <Link to="/search">Search</Link>
             <Link to="/save">Saved</Link>
-            {/* <button className="btn btn-danger" onClick={ () => axios.post('/signout')}>Signout</button> */}
             <Link to="/logout">Logout</Link>
           </div>
           <Redirect to="/search" />
           <div>
             <Route path="/search" component={ this.searchPage }/>
             <Route path="/save" component={ SavedList }/>
-            <Route path="/logout" component= { this.logout }/>
+            <Route path="/logout" render={ () => <Logout authenticate={ this.props.authenticate }/> }></Route>
           </div>
         </div>
         

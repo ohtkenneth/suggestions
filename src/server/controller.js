@@ -1,6 +1,7 @@
 const path = require('path');
 const db = require('../db/db');
 const yelp = require('../helpers/yelp');
+const googleAuth = require('../helpers/googleAuth');
 
 module.exports = {
   index: {
@@ -112,7 +113,20 @@ module.exports = {
     post(req, res) {
       req.session.destroy();
       res.end('signed out');
-    }
+    },
+    google(req, res) {
+      console.log('authenticating with google...');
+      googleAuth.authenticate('google', {
+        scope: ['https://www.googleapis.com/auth/plus.login'],
+      });
+    },
+    googleCallback(req, res) {
+      console.log('google auth callback');
+      googleAuth.authenticate('google', { failureRedirect: '/login' }),
+      function(req, res) {
+        res.redirect('/');
+      }
+    },
   },
   home: {
     get(req, res) {
@@ -127,7 +141,10 @@ module.exports = {
         res.redirect('/')
       } else {
         db.getSavedItems({ email: req.session.email})
-        .then(savedItems => res.end(JSON.stringify(savedItems)))
+        .then(savedItems => {
+          res.send((savedItems));
+          res.end();
+        })
         .catch(err => res.end(JSON.stringify(err)));
       }
     },

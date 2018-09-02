@@ -23,6 +23,12 @@ router.route('/autocomplete')
 router.route('/authenticate')
 .get(controller.authenticate.get);
 
+router.route('/authenticate/google')
+.get(controller.authenticate.google);
+
+router.route('/authenticate/google/callback')
+.get(controller.authenticate.googleCallback);
+
 router.route('/signout')
 .post(controller.signout.post);
 
