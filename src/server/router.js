@@ -20,14 +20,14 @@ router.route('/search')
 router.route('/autocomplete')
 .post(controller.autocomplete.post);
 
-router.route('/authenticate')
-.get(controller.authenticate.get);
+router.route('/auth')
+.get(controller.auth.get);
 
-router.route('/authenticate/google')
-.get(controller.authenticate.google);
+router.route('/auth/google')
+.get(controller.auth.google);
 
-router.route('/authenticate/google/callback')
-.get(controller.authenticate.googleCallback);
+router.route('/auth/google/callback')
+.get(controller.auth.googleCallback);
 
 router.route('/signout')
 .post(controller.signout.post);

@@ -15,17 +15,17 @@ const userSchema = new Schema({
   savedItems: Array,
 });
 
-// const saveItemSchema = new Schema({
-//   email: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//   },
-//   items: Array,
-// });
+const googleUser = new Schema({
+  googleId: String,
+  // googleToken: String,
+  // googleName: String,
+  // googleEmail: String,
+});
 
 /***** MODELS ****************************************/
 const UserModel = mongoose.model('Users', userSchema);
+
+const GoogleUserModel = mongoose.model('GoogleUsers', googleUser);
 // const SaveItemModel = mongoose.model('SaveItem', saveItemSchema);
 
 /***** user functions ****************************************/
@@ -71,10 +71,8 @@ const getUser = ({ email, password }) => {
     });
   });
 };
-// saveUser({ email: 'ken@ken.com', password: '123 '})
-// .then(user => console.log('success!'))
-// .catch(err => console.log(err));
 
+// save item from a search
 const saveItem = ({ email, item }) => {
   console.log('SAVING', email, item);
   // item should be object holding category and item data
@@ -88,6 +86,7 @@ const saveItem = ({ email, item }) => {
   });
 };
 
+// retrieve all user saved items
 const getSavedItems = ({ email }) => {
   console.log('getSavedItemsEmail', email);
   return new Promise((resolve, reject) => {
@@ -103,5 +102,6 @@ module.exports = {
   saveUser,
   getUser,
   saveItem,
-  getSavedItems
+  getSavedItems,
+  GoogleUserModel,
 };

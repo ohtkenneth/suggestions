@@ -1,7 +1,10 @@
 const path = require('path');
 const db = require('../db/db');
 const yelp = require('../helpers/yelp');
-const googleAuth = require('../helpers/googleAuth');
+const passport = require('passport');
+const passportConfig = require('../config/passportConfig');
+
+passportConfig(passport);
 
 module.exports = {
   index: {
@@ -103,7 +106,7 @@ module.exports = {
       res.end('signed out');
     }
   },
-  authenticate: {
+  auth: {
     get(req, res) {
       if (req.session.isAuthenticated) {
         res.end('true');
@@ -116,14 +119,26 @@ module.exports = {
     },
     google(req, res) {
       console.log('authenticating with google...');
-      googleAuth.authenticate('google', {
-        scope: ['https://www.googleapis.com/auth/plus.login'],
+      // googleAuth.authenticate('google', {
+      //   scope: ['https://www.googleapis.com/auth/plus.login'],
+      // });
+      console.log(passport);
+
+      passport.authenticate('google', {
+        scope: ['https://www.googleapis.com/auth/userinfo.profile'],
       });
     },
     googleCallback(req, res) {
       console.log('google auth callback');
-      googleAuth.authenticate('google', { failureRedirect: '/login' }),
-      function(req, res) {
+      // googleAuth.authenticate('google', { failureRedirect: '/login' }),
+      // function(req, res) {
+      //   res.redirect('/');
+      // }
+      passport.authenticate('google', {
+        failureRedirect: '/login',
+      }),
+      (req, res) => {
+        req.session.token = req.user.token;
         res.redirect('/');
       }
     },

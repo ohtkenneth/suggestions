@@ -52,7 +52,7 @@ class Login extends React.Component {
             <button type="button" className="btn btn-success" onClick={ this.onLogin }>Log in</button>
           </div>
         </form>
-        <button type="button" onClick={ () => axios.get('/authenticate/google') } >Google auth</button>
+        <button type="button" onClick={ () => axios.get('/auth/google') } >Google auth</button>
       </div>
     )
   }
