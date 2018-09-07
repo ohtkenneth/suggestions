@@ -19,7 +19,7 @@ class Router extends React.Component {
     this.authenticate();
   }
   authenticate() {
-    axios.get('/auth')
+    axios.get('/api/auth')
     .then(isAuthenticated => {
       if (isAuthenticated.data === true) {
         this.setState({

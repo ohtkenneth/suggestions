@@ -2,7 +2,7 @@
   "name": "suggestions",
   "version": "0.0.1",
   "description": "This is for people of all ages who, when traveling, want a simple way of getting great suggestions for the time they are traveling.",
-  "main": "server.js",
+  "main": "./src/server/server.js",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
@@ -40,9 +40,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watchWebpack": "webpack --mode development --watch",
-    "buildDev": "webpack --mode development",
-    "devServer": "nodemon src/server/server.js",
+    "build-dev": "webpack --mode development --watch",
+    "start": "nodemon",
     "devReact": "webpack-dev-server --config ./webpack.config.js --mode development"
   },
   "repository": {
@@ -54,5 +53,6 @@
   "bugs": {
     "url": "https://github.com/ohtkenneth/suggestions/issues"
   },
-  "homepage": "https://github.com/ohtkenneth/suggestions#readme"
+  "homepage": "https://github.com/ohtkenneth/suggestions#readme",
+  "proxy": "http://localhost:3000"
 }

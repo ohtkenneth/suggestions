@@ -36,4 +36,9 @@ app.use((req, res, next) => {
 
 app.use('/', router);
 
+app.get('*', (req, res) => {
+  // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+  res.redirect('/');
+});
+
 app.listen(PORT, () => console.log('Suggestions server listening on ' + PORT));

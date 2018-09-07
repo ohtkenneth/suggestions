@@ -16,7 +16,7 @@ class SavedList extends React.Component {
     this.getSavedItems();
   }
   getSavedItems() {
-    axios.get('/save')
+    axios.get('/api/save')
     .then(savedItems => {
       this.setState({ savedItems: savedItems.data.savedItems });
     })

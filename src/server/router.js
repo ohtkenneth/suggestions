@@ -13,14 +13,14 @@ router.route('/login')
 .get(controller.login.get)
 .post(controller.login.post);
 
-router.route('/search')
+router.route('/api/search')
 .get(controller.search.get)
 .post(controller.search.post);
 
-router.route('/autocomplete')
+router.route('/api/autocomplete')
 .post(controller.autocomplete.post);
 
-router.route('/auth')
+router.route('/api/auth')
 .get(controller.auth.get);
 
 router.route('/auth/google')
@@ -35,7 +35,7 @@ router.route('/signout')
 router.route('/home')
 .get(controller.home.get);
 
-router.route('/save')
+router.route('/api/save')
 .get(controller.save.get)
 .post(controller.save.post);
 
