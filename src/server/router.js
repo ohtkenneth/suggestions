@@ -23,11 +23,11 @@ router.route('/api/autocomplete')
 router.route('/api/auth')
 .get(controller.auth.get);
 
-router.route('/auth/google')
-.get(controller.auth.google);
+// router.route('/api/auth/google')
+// .get(controller.auth.google);
 
-router.route('/auth/google/callback')
-.get(controller.auth.googleCallback);
+// router.route('/api/auth/google/callback')
+// .get(controller.auth.googleCallback);
 
 router.route('/signout')
 .post(controller.signout.post);

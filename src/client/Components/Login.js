@@ -11,7 +11,6 @@ class Login extends React.Component {
       email: '',
       password: '',
     };
-    console.log(props);
 
     this.onLogin = this.onLogin.bind(this);
   }
@@ -52,7 +51,8 @@ class Login extends React.Component {
             <button type="button" className="btn btn-success" onClick={ this.onLogin }>Log in</button>
           </div>
         </form>
-        <button type="button" onClick={ () => axios.get('/auth/google') } >Google auth</button>
+        {/* <button type="button" onClick={ () => axios.get('/api/auth/google') } >Google auth</button> */}
+        <a href="/api/auth/google">Google Login</a>
       </div>
     )
   }
