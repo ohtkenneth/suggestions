@@ -1,8 +1,6 @@
 const path = require('path');
 const db = require('../db/db');
 const yelp = require('../helpers/yelp');
-const passport = require('passport');
-const passportConfig = require('../config/passportConfig');
 
 module.exports = {
   index: {

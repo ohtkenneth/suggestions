@@ -34,13 +34,16 @@ app.use(session({
 
 // OAUTH ROUTES
 app.get('/api/auth/google', passport.authenticate('google', {scope: ['profile']}))
-app.get('/api/auth/google/callback', 
-  passport.authenticate('google', {
-    failureRedirect: '/login',
-  }),
-  (req, res) => {
-    req.session.token = req.user.token;
-    res.redirect('/');
+app.get('/api/auth/google/callback', passport.authenticate('google'), (req, res) => {
+  res.send('you google authed!');
+  // passport.authenticate('google', {
+  //   failureRedirect: '/login',
+  // }),
+  // (req, res) => {
+  //   req.session.token = req.user.token;
+  //   // res.redirect('/');
+  //   res.send('you googled authed!');
+  // }
   }
 )
 
