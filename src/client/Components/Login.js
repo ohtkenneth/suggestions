@@ -17,7 +17,7 @@ class Login extends React.Component {
 
   onLogin({ authenticate }) {
     if (this.state.email !== '' && this.state.password !== '') {
-      axios.post('/login', { email: this.state.email , password: this.state.password })
+      axios.post('/api/auth', { email: this.state.email , password: this.state.password })
       .then(results => {
         console.log(results);
         if (results.data === 'invalid') {
@@ -57,41 +57,5 @@ class Login extends React.Component {
     )
   }
 }
-
-
-// const Login = () => {
-//   let email = '';
-//   let password = '';
-
-//   const onLogin = ({ authenticate }) => {
-//     if (email !== '' && password !== '') {
-//       axios.post('/login', { email, password })
-//       .then(results => {
-//         console.log(results);
-//         if (results.data === 'invalid') {
-//           // tell user invalid credentials
-//         } else {
-//           // log user in
-//         }
-//       })
-//       .catch(err => console.log('LOGIN ERROR', err));
-//     } else {
-//       // enter email and password
-//       console.log('enter email and password');
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <form>
-//         <div className="form-control md-8">
-//           <input type="text" className="form-control" placeholder="email" onChange={ (e) => email = e.target.value }/>
-//           <input type="text" className="form-control" placeholder="password" onChange={ (e) => password = e.target.value }/>
-//           <button type="button" className="btn btn-success" onClick={ onLogin }>Log in</button>
-//         </div>
-//       </form>
-//     </div>
-//   )
-// };
 
 export default Login;

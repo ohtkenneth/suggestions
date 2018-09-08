@@ -20,15 +20,6 @@ router.route('/api/search')
 router.route('/api/autocomplete')
 .post(controller.autocomplete.post);
 
-router.route('/api/auth')
-.get(controller.auth.get);
-
-// router.route('/api/auth/google')
-// .get(controller.auth.google);
-
-// router.route('/api/auth/google/callback')
-// .get(controller.auth.googleCallback);
-
 router.route('/signout')
 .post(controller.signout.post);
 

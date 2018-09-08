@@ -1,4 +1,5 @@
 const path = require('path');
+const helpers = require('./controllerHelpers');
 const db = require('../db/db');
 const yelp = require('../helpers/yelp');
 
@@ -13,56 +14,43 @@ module.exports = {
       res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
     },
     post(req, res) {
-      const userData = req.body;
-      db.saveUser(userData)
-      .then((msg) => {
-        req.session.isAuthenticated = true;
-        req.session.email = userData.email;
-        console.log(req.session);
-        // res.redirect('/', 201);
-        // res.redirect(201, '/search')
-        res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
-      })
-      .catch((err) => {
-        if (err === 'email taken') {
-          res.end('Email taken');
-        } else {
-          console.log('ERROR from controller.js signup.save()', err)
-        }
-      });
+      const { email, password } = req.body;
+
+      helpers.signUpUser({ email, password })
+        .then(result => {
+          if (result === 'invalid') {
+            res.end('Email taken!');
+          } else {
+            req.session.isAuthenticated = true;
+            req.session.email = email;
+            res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+          } 
+        });
     },
   },
   login: {
     get(req, res) {
-      // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+      if (req.user) {
+        req.logout();
+      }
+      
       res.redirect('/');
     },
     post(req, res) {
-      const userData = req.body;
-
-      db.getUser(userData)
-      .then(results => {
-        console.log(results);
-        if (results === 'invalid') {
-          res.end(results);
-        } else {
-          // user authenticated (results === 'success')
-          req.session.isAuthenticated = true;
-          req.session.email = userData.email;
-          console.log(req.session);
-          // res.redirect('/', 201);
-          // res.redirect(201, '/search')
-          res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
-        }
-      })
-      .catch(err => {
-        if (err == 'invalid') {
-          console.log('invalid!');
-          res.end('invalid');
-        } else {
-          console.log('ERROR from controller.js users.get()', err)
-        }
-      });
+      const { email, password } = req.body;
+      
+      helpers.validateUser({ email, password })
+        .then((result => {
+          if (result === 'invalid') {
+            // invalid credentials
+            res.end('Wrong email or password!');
+          } else {
+            // sign user in
+            req.session.isAuthenticated = true;
+            req.session.email = email;
+            res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+          }
+        }));
     },
   },
   search: {
@@ -97,44 +85,8 @@ module.exports = {
   },
   signout: {
     post(req, res) {
-      req.session.destroy()
-      console.log('req session', req.session);
       res.end('signed out');
     }
-  },
-  auth: {
-    get(req, res) {
-      if (req.session.isAuthenticated) {
-        res.end('true');
-      }
-      res.end('false');
-    },
-    post(req, res) {
-      req.session.destroy();
-      res.end('signed out');
-    },
-    // google(req, res) {
-    //   console.log('authenticating with google...');
-    //   passport.authenticate('google', {
-    //     scope: ['https://www.googleapis.com/auth/plus.login'],
-    //     prompt : 'consent'
-    //   });
-    // },
-    // googleCallback(req, res) {
-    //   // console.log('google auth callback');
-    //   // googleAuth.authenticate('google', { failureRedirect: '/login' }),
-    //   // function(req, res) {
-    //   //   res.redirect('/');
-    //   // }
-    //   console.log('am i working')
-      // passport.authenticate('google', {
-      //   failureRedirect: '/login',
-      // }),
-      // (req, res) => {
-      //   req.session.token = req.user.token;
-      //   res.redirect('/');
-      // }
-    // },
   },
   home: {
     get(req, res) {

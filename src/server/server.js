@@ -4,13 +4,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const session = require('express-session');
-const passport = require('passport');
+const cookieSession = require('cookie-session');
 const cors = require('cors');
+
+const passport = require('passport');
 const passportConfig = require('../config/passportConfig');
 
 /* own modules */
 const router = require('./router');
+const authRouter = require('./authRouter');
+const keys = require('../config/keys');
 // const loggerMiddleware = require('./loggerMiddleware');
 
 const app = express();
@@ -22,32 +25,18 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../../dist')));
-// app.use(morgan('combined', { stream: accessLogStream }));
 app.use(morgan('dev'));
-// app.use(loggerMiddleware);
-app.use(session({
-  secret: 'cat',
-  resave: false,
-  saveUninitialized: true,
-  isAuthenticated: false,
-}));
 
-// OAUTH ROUTES
-app.get('/api/auth/google', passport.authenticate('google', {scope: ['profile']}))
-app.get('/api/auth/google/callback', passport.authenticate('google'), (req, res) => {
-  res.send('you google authed!');
-  // passport.authenticate('google', {
-  //   failureRedirect: '/login',
-  // }),
-  // (req, res) => {
-  //   req.session.token = req.user.token;
-  //   // res.redirect('/');
-  //   res.send('you googled authed!');
-  // }
-  }
-)
+// encrypts and sets cookie
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [keys.session.cookieKey]
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', router);
+app.use('/api/auth', authRouter);
 
 app.get('*', (req, res) => {
   // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));

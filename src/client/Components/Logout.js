@@ -4,7 +4,7 @@ import axios from 'axios';
 
 class Logout extends React.Component {
   componentWillMount() {
-    axios.post('/logout')
+    axios.post('/api/auth/logout')
     .then(() => {
       this.props.authenticate()
     })
