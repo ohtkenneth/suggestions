@@ -22,7 +22,6 @@ const saveUser = (userData) => {
 
 const getUser = ({ email, password }) => {
   // get user
-  console.log('from get user', email, password)
   return new Promise((resolve, reject) => {
     UserModel.findOne({ email }, (err, results) => {
       if (err) reject(err);
@@ -36,7 +35,7 @@ const getUser = ({ email, password }) => {
           reject('invalid');
         }
         // correct password / email
-        resolve('success');
+        resolve(results);
       }
     });
   });
@@ -85,6 +84,18 @@ const findGoogleUserById = (id) => {
   });
 };
 
+const findUserById = (id) => {
+  return new Promise((resolve, reject) => {
+    UserModel.findById(id, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
+
 // save item from a search
 const saveItem = ({ email, item }) => {
   console.log('SAVING', email, item);
@@ -119,4 +130,5 @@ module.exports = {
   getSavedItems,
   findOrCreateGoogleUser,
   findGoogleUserById,
+  findUserById,
 };

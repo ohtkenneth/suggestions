@@ -21,6 +21,10 @@ const googleSchema = new Schema({
   // googleEmail: String,
 });
 
+userSchema.pre('save', (next) => {
+  next();
+});
+
 googleSchema.plugin(findOrCreate);
 
 module.exports = {

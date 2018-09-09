@@ -20,13 +20,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logs', 'access.log'), { flags: 'a' });
 
+app.use(morgan('dev'));
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../../dist')));
-app.use(morgan('dev'));
-
 // encrypts and sets cookie
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
@@ -34,6 +33,13 @@ app.use(cookieSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// app.post('/api/auth', 
+//   passport.authenticate('local'),
+//   (req, res) => {
+//     console.log(req.body);
+//   console.log('NOT WORKSDIG')
+// })
 
 app.use('/', router);
 app.use('/api/auth', authRouter);
