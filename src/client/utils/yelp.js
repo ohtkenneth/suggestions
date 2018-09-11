@@ -3,23 +3,21 @@ const querystring = require('querystring');
 const yelpApiKey = require('../config/keys').yelp;
 
 module.exports = {
-  search(searchData, cb) {
-    console.log('SEARCH DATA', searchData);
+  search(location, searchTerm) {
+    console.log('SEARCH DATA', location, searchTerm);
     const searchOptions = {
       url: 'https://api.yelp.com/v3/businesses/search',
       method: 'get',
       params: {
-        term: searchData.searchValue,
-        location: searchData.location,
+        term: searchTerm,
+        location: location,
       },
       headers: {
         Authorization: `Bearer ${yelpApiKey}`,
         'Content-Type': 'application/json',
       }
     };
-    axios(searchOptions)
-    .then(results => cb(null, results))
-    .catch(err => cb(err, null));
+    return axios(searchOptions)
   },
   autocomplete(text, cb) {
     const searchOptions = {

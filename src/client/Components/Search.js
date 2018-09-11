@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import yelp from '../../helpers/yelp';
+import yelp from '../utils/yelp';
 import axios from 'axios';
 import CategoryGrid from './CategoryGrid';
 
@@ -78,20 +78,3 @@ class Search extends React.Component {
   }
 }
 export default Search;
-// const Search = ({ search }) => {
-//   let searchTerm = '';
-//   const onSearch = () => {
-//     document.getElementById('searchInput').value = '';
-  
-//     search(searchTerm);
-//   }
-//   return (
-//     <div>
-//       <form action="/search" method="post">
-//         <input id="searchInput" type="text" onChange={ (e) => searchTerm = e.target.value } />
-//         <button type="button" onClick={ onSearch }>Search!</button>
-//       </form>
-//     </div>
-//   )
-// };
-

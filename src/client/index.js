@@ -9,14 +9,14 @@ import thunkMiddleware from 'redux-thunk';
 
 import { checkIsLoggedInDone, checkIsLoggedInFailure } from './Components/actions/checkIsLoggedIn';
 import user from './utils/user';
-import reducers from './Components/reducers/reducers';
+import combinedReducers from './Components/reducers/combined';
 import VisibleApp from './Components/Containers/VisibleApp';
 import history from './utils/history';
 
 const loggerMiddleware = createLogger();
 
 const store = createStore(
-  reducers,
+  combinedReducers,
   applyMiddleware(
     thunkMiddleware,
     loggerMiddleware,

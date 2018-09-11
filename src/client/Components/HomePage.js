@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Redirect, Route } from 'react-router-dom';
 import axios from 'axios';
-import Search from './Search';
+// import Search from './Search';
+import VisibleSearch from './Containers/VisibleSearch';
 
 import SavedList from './SavedList';
 import CategoryGrid from './CategoryGrid';
@@ -21,7 +22,7 @@ class HomePage extends Component {
           </div>
           <Redirect to="/search" />
           <div>
-            <Route path="/search" component={ Search }/>
+            <Route path="/search" component={ VisibleSearch }/>
             <Route path="/map" component={ Map } />
             <Route path="/save" component={ SavedList }/>
             <Route path="/logout" render={ () => <Logout /> }></Route>

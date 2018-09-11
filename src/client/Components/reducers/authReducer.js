@@ -1,10 +1,8 @@
-import { combineReducers } from 'redux';
-
 const initialAuthState = {
   isLoggedIn: false,
 }
 
-function auth(state = initialAuthState, action) {
+function authReducer(state = initialAuthState, action) {
   switch (action.type) {
     case 'CHECK_IS_LOGGED_IN_DONE':
       return Object.assign({}, state, {
@@ -26,8 +24,4 @@ function auth(state = initialAuthState, action) {
   }
 };
 
-const suggestionsApp = combineReducers({
-  auth
-});
-
-export default suggestionsApp;
+export default authReducer;
