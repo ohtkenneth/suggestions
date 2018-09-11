@@ -1,39 +1,23 @@
+import '@babel/polyfill';
 import React, { Component } from 'react';
-import axios from 'axios';
 import { BrowserRouter, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log('login props', props);
     this.state = {
-      isAuthenticated: false,
       email: '',
       password: '',
     };
-
     this.onLogin = this.onLogin.bind(this);
   }
 
-  onLogin({ authenticate }) {
+  onLogin() {
     if (this.state.email !== '' && this.state.password !== '') {
-      axios.post('/api/auth', { email: this.state.email , password: this.state.password })
-      .then(results => {
-        console.log(results);
-        if (results.data === 'invalid') {
-          // tell user invalid credentials
-          alert('Wrong username or password');
-        } else {
-          // log user in
-          console.log('redirecing to index');
-          this.setState({
-            isAuthenticated: true,
-          });
-
-          this.props.authenticate();
-        } 
-      })
-      .catch(err => console.log('LOGIN ERROR', err));
+      // dispatch action
+      this.props.onLogin(this.state.email, this.state.password);
     } else {
       // enter email and password
       console.log('enter email and password');
@@ -41,7 +25,6 @@ class Login extends React.Component {
   }
 
   render() {
-    const isAuthenticated = this.state.isAuthenticated;
     return (
       <div>
         <form>

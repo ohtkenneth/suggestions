@@ -6,7 +6,7 @@ router.route('/')
 .get(controller.index.get);
 
 router.route('/signup')
-.get(controller.signup.get)
+// .get(controller.signup.get)
 .post(controller.signup.post);
 
 router.route('/login')

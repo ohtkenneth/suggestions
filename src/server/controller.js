@@ -10,9 +10,9 @@ module.exports = {
     },
   },
   signup: {
-    get(req, res) {
-      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
-    },
+    // get(req, res) {
+    //   res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+    // },
     post(req, res) {
       const { email, password } = req.body;
 

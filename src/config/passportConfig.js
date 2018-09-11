@@ -4,25 +4,24 @@ const LocalStrategy = require('passport-local').Strategy;
 const googleKeys = require('./keys').google;
 const { getUser, findOrCreateGoogleUser, findGoogleUserById, findUserById } = require('../db/dbHelpers'); 
 
+// create cookie session
 passport.serializeUser((user, done) => {
   console.log('serializing...')
   // done(null, user.id);
-  
   const options = { id: user.id };
-  
+  // check for account type for db collectin lookup
   if (user.googleId) {
     options.type = 'google';
   } else {
     options.type = 'local';
   }
-
+  // cookie created; pass to deserialization
   done(null, options);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('deserializing...');
-  console.log('DESERIALIZE', user);
-
+  console.log('deserializing...', user);
+  // find user with id on cookie
   if (user.type === 'google') {
     findGoogleUser(user.id)
       .then(result => {
@@ -37,14 +36,17 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use(new LocalStrategy(
+  // specify properties to grab from request body
   {
     usernameField: 'email',
     passwordField: 'password'
   }, (email, password, done) => {
     console.log(email, password)
+    // retrieve user from db
     getUser({ email, password })
       .then(results => {
         console.log('LOCAL RESULTS', results);
+        // pass user to serialize to create cookie session
         done(null, results);
       })
       .catch(err => {

@@ -5,28 +5,29 @@ const passportConfig = require('../config/passportConfig');
 
 const authController = require('./authController');
 
+// Router.js authenticator
 router.get('/', (req, res) => {
-  console.log(req.user);
-  if (req.user) {
-    res.send('true');
-  } else {
-    res.send('false');
-  }
+  console.log('USER', req.user);
+  const options = req.user ? true : false;
+  res.send(options);
 });
 
+// login post with local email / password
 router.post('/',
   passport.authenticate('local'),
   (req, res) => {
-    console.log('user session', req.user)
+    console.log('redirecting upon success login', req.user);
     res.redirect('/');
   }
-)
+);
 
 router.post('/logout', (req, res) => {
+  // destroy session
   req.logout();
   res.redirect('/');
-})
+});
 
+// google strategy
 router.route('/google')
 .get(passport.authenticate('google', {scope: ['profile']}));
 

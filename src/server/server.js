@@ -26,26 +26,20 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../../dist')));
-// encrypts and sets cookie
+// encrypts and sets cookie on client
 app.use(cookieSession({
+  name: 'session',
   maxAge: 24 * 60 * 60 * 1000,
   keys: [keys.session.cookieKey]
 }));
 app.use(passport.initialize());
+// sets sesssion on 'req.user'
 app.use(passport.session());
-
-// app.post('/api/auth', 
-//   passport.authenticate('local'),
-//   (req, res) => {
-//     console.log(req.body);
-//   console.log('NOT WORKSDIG')
-// })
 
 app.use('/', router);
 app.use('/api/auth', authRouter);
 
 app.get('*', (req, res) => {
-  // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
   res.redirect('/');
 });
 

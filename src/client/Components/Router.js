@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-import App from './App';
+import App from './oldApp';
 import Login from './Login';
 import Signup from './Signup';
 import './styles/Router.css';
+import AuthPage from './AuthPage';
 
 class Router extends React.Component { 
   constructor(props) {
@@ -40,19 +41,20 @@ class Router extends React.Component {
     
     if (!isAuthenticated) {
       return (
-        <BrowserRouter>
-        <div className="landing-page">
-          <br/>
-          <br/>
-          <h1>Suggestions</h1>       
-          <br/>
-          <Route path="/login" render={ () => <Login authenticate={this.authenticate}/>}></Route>
-          <Route path="/signup" render={ () => <Signup authenticate={this.authenticate}/>}></Route>
-          <br/>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
-        </div>
-        </BrowserRouter>
+        // <BrowserRouter>
+        // <div className="landing-page">
+        //   <br/>
+        //   <br/>
+        //   <h1>Suggestions</h1>       
+        //   <br/>
+        //   <Route path="/login" render={ () => <Login authenticate={this.authenticate}/>}></Route>
+        //   <Route path="/signup" render={ () => <Signup authenticate={this.authenticate}/>}></Route>
+        //   <br/>
+        //   <Link to="/login">Login</Link>
+        //   <Link to="/signup">Signup</Link>
+        // </div>
+        // </BrowserRouter>
+        <AuthPage/>
       )
     }
     return (

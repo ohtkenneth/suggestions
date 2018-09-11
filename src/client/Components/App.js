@@ -1,65 +1,32 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Link, Redirect, Route } from 'react-router-dom';
-import Search from './Search';
-import SavedList from './SavedList';
+import { Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import CategoryGrid from './CategoryGrid';
-import Logout from './Logout';
-import Map from './Map';
+import history from '../utils/history';
+
+// import VisibleAuthPage from './Containers/VisibleAuthPage';
+import AuthPage from './AuthPage';
+import HomePage from './HomePage';
+// This component ios HoC that prevents the user from accessing a route if he's not logged in
+import PrivateRoute from './PrivateRoute';
+
 import './styles/App.css';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-   
-    this.state = {
-      categories: [],
-    };
-
-    this.search = this.search.bind(this);
-    this.searchPage = this.searchPage.bind(this);
-  }
-  search(searchData) {
-    // post to server
-    axios.post('/api/search', searchData)
-    .then(results => {
-      // set state to re render with updated categories
-      this.setState({
-        categories: this.state.categories.concat({ category: searchData.searchValue, items: results.data.businesses})
-      });
-    })
-    .catch(err => console.log('ERROR from App.js search()'));
-  }
-  searchPage() {
-    return (
-      <div className="search">
-        <Search search={ this.search }/>
-        <CategoryGrid categories={ this.state.categories } />
+const App = (props) => {
+  console.log(props);
+  return (
+    <Router history={ history }>
+      <div className="App">
+        in test app
+        <Switch>
+          {/* A user can't go to the HomePage if is not authenticated */}
+          <PrivateRoute exact path="/" component={ HomePage } isLoggedIn={ props.isLoggedIn } />
+          {/* <Route path="/auth" component={ AuthPage } /> */}
+          <Route path='/auth' render={ () => <AuthPage /> }> </Route>
+          {/* <Route path="/login" render={ () => <Login authenticate={this.authenticate}/>}></Route> */}
+        </Switch>
       </div>
-    )
-  }
-  render() {
-    return (
-      <BrowserRouter>
-        <div>
-          <div className="home-nav">
-            <Link to="/search">Search</Link>
-            <Link to="/map">Map</Link>
-            <Link to="/save">Saved</Link>
-            <Link to="/logout">Logout</Link>
-          </div>
-          <Redirect to="/search" />
-          <div>
-            <Route path="/search" component={ this.searchPage }/>
-            <Route path="/map" component={ Map } />
-            <Route path="/save" component={ SavedList }/>
-            <Route path="/logout" render={ () => <Logout authenticate={ this.props.authenticate }/> }></Route>
-          </div>
-        </div>
-        
-      </BrowserRouter>
-    );
-  };
+    </Router>
+  )
 }
 
 export default App;

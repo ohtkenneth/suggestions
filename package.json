@@ -4,6 +4,7 @@
   "description": "This is for people of all ages who, when traveling, want a simple way of getting great suggestions for the time they are traveling.",
   "main": "./src/server/server.js",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.1.3",
@@ -39,6 +40,10 @@
     "nodemon": "^1.18.4",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "style-loader": "^0.23.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
