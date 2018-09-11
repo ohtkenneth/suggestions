@@ -1,6 +1,6 @@
 const axios = require('axios');
 const querystring = require('querystring');
-const yelpApiKey = require('../config/keys').yelp;
+const yelpApiKey = require('../../config/keys').yelp;
 
 module.exports = {
   search(location, searchTerm) {

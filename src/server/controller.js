@@ -1,14 +1,9 @@
 const path = require('path');
 const helpers = require('./controllerHelpers');
 const db = require('../db/db');
-const yelp = require('../helpers/yelp');
+const yelp = require('./helpers/yelp');
 
 module.exports = {
-  index: {
-    get(req, res) {
-      res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
-    },
-  },
   signup: {
     // get(req, res) {
     //   res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
@@ -54,24 +49,31 @@ module.exports = {
     },
   },
   search: {
-    get(req, res) {
-      // res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
-      res.redirect('/');
-    },
     post(req, res) {
       // use yelp api to get places
-      // const { searchTerm } = req.body;
-      // req.body = { searchTerm, location }
-      yelp.search(req.body, (err, results) => {
-        if (err) {
+      const { location, searchTerm } = req.body;
+      // req.body = { searchTerm, location }      
+      // yelp.search(location, searchTerm, (err, results) => {
+      //   if (err) {
+          // if (err.code === 'LOCATION_NOT_FOUND') {
+          //   res.end('Location not found!');
+          // } else {
+          //   console.log('ERROR from controller.js search()', err);
+          // }
+      //   }
+      //   res.end(JSON.stringify(results.data));
+      // });
+      yelp.search(location, searchTerm)
+        .then(results => {
+          res.end(JSON.stringify(results.data));
+        })
+        .catch(err => {
           if (err.code === 'LOCATION_NOT_FOUND') {
             res.end('Location not found!');
           } else {
             console.log('ERROR from controller.js search()', err);
           }
-        }
-        res.end(JSON.stringify(results.data));
-      });
+        });
     },
   },
   autocomplete: {

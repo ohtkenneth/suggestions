@@ -2,22 +2,17 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./controller');
 
-router.route('/')
-.get(controller.index.get);
-
 router.route('/signup')
 // .get(controller.signup.get)
 .post(controller.signup.post);
 
 router.route('/login')
-.get(controller.login.get)
 .post(controller.login.post);
 
-router.route('/api/search')
-.get(controller.search.get)
+router.route('/search')
 .post(controller.search.post);
 
-router.route('/api/autocomplete')
+router.route('/autocomplete')
 .post(controller.autocomplete.post);
 
 router.route('/signout')
@@ -26,7 +21,7 @@ router.route('/signout')
 router.route('/home')
 .get(controller.home.get);
 
-router.route('/api/save')
+router.route('/save')
 .get(controller.save.get)
 .post(controller.save.post);
 

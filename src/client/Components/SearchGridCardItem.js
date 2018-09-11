@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/CategoryItem.css';
 import axios from 'axios';
 
-const CategoryItem = ({ category, item }) => {
+const SearchGridCardItem = ({ category, item }) => {
   const onSave = (e) => {
     console.log(item);
     axios.post('/save', { category, item})
@@ -21,4 +21,4 @@ const CategoryItem = ({ category, item }) => {
   )
 };
 
-export default CategoryItem;
+export default SearchGridCardItem;

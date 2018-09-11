@@ -36,7 +36,10 @@ app.use(passport.initialize());
 // sets sesssion on 'req.user'
 app.use(passport.session());
 
-app.use('/', router);
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../../dist', 'index.html'));
+});
+app.use('/api', router);
 app.use('/api/auth', authRouter);
 
 app.get('*', (req, res) => {

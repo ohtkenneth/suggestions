@@ -4,7 +4,7 @@ import { localLogin } from '../actions/localAuthActions';
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.auth.isLoggedIn,
+    isLoggedIn: state.authReducer.isLoggedIn,
   }
 }
 

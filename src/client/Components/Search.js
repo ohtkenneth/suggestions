@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import yelp from '../utils/yelp';
 import axios from 'axios';
-import CategoryGrid from './CategoryGrid';
+import CategoryGrid from './SearchGrid';
 
 class Search extends React.Component {
   constructor(props) {
@@ -34,7 +33,7 @@ class Search extends React.Component {
     searchInput.blur();
     searchInput.value = '';
 
-    this.props.search({ searchValue, location });
+    this.props.onSearch(location, searchValue);
   }
   onInputChange(e) {
     let inputValue = e.target.value;
@@ -73,6 +72,9 @@ class Search extends React.Component {
             <button type="button" onClick={ this.onSearch } className="btn btn-success">Search!</button>
           </div>
         </form>
+        <div>
+          <CategoryGrid searches={ this.props.searches}/>
+        </div>
       </div>
     )
   }

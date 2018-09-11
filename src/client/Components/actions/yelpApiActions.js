@@ -1,9 +1,13 @@
-import { search } from '../../helpers/yelp';
+// import { search } from '../../utils/yelp';
+import axios from 'axios';
 
-function requestSearch(searchTerm) {
+function requestSearch(location, searchTerm) {
   return {
     type: 'REQUEST_YELP_SEARCH',
-    payload: searchTerm,
+    payload: {
+      location,
+      searchTerm
+    }
   };
 }
 
@@ -23,15 +27,23 @@ function failedSearch(err) {
 
 export function yelpSearch(location, searchTerm) {
   return dispatch => {
-    dispatch(requestSearch(searchTerm));
+    dispatch(requestSearch(location, searchTerm));
 
-    search(location, searchTerm)
+    // post to express server
+    const options = {
+      url: '/api/search',
+      method: 'post',
+      data: {
+        location,
+        searchTerm
+      }
+    }
+    axios(options)
       .then(results => {
-        receiveSearchResults({
+        dispatch(receiveSearchResults({
           searchTerm,
           results: results.data,
-        });
-        console.log(results.data);
+        }));
       })
       .catch(err => {
         dispatch(failedSearch(err));

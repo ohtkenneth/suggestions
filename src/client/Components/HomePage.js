@@ -5,7 +5,7 @@ import axios from 'axios';
 import VisibleSearch from './Containers/VisibleSearch';
 
 import SavedList from './SavedList';
-import CategoryGrid from './CategoryGrid';
+import CategoryGrid from './SearchGrid';
 import Logout from './Logout';
 import Map from './Map';
 
