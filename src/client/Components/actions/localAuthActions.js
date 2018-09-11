@@ -19,12 +19,12 @@ function loginSuccess(user) {
     user
   };
 }
-export function login(email, password) {
+export function localLogin(email, password) {
   return dispatch => {
     // tell that we are logging in
     dispatch(loginStart({ email }));
     
-    user.login(email, password)
+    user.localLogin(email, password)
       // successful login
       .then(user => {
         // dispatch to reducer to set isloggedIn

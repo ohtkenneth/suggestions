@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import Login from '../Login';
-import { login } from '../actions/actions';
+import { localLogin } from '../actions/localAuthActions';
 import { withRouter } from 'react-router'
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (email, password) => {
-      dispatch(login(email, password));
+    onLocalLogin: (email, password) => {
+      dispatch(localLogin(email, password));
     } 
   };
 }

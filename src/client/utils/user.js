@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const user = {
-  login(email, password) {
+  localLogin(email, password) {
     const options = {
       url: '/api/auth',
       method: 'post',
@@ -9,6 +9,20 @@ const user = {
         email,
         password,
       }
+    };
+    return axios(options);
+  },
+  googleLogin() {
+    const options = { 
+      url: '/api/auth/google',
+      method: 'get',
+    };
+    return axios(options);
+  },
+  checkLoggedIn() {
+    const options = {
+      url: '/api/auth',
+      method: 'get',
     };
     return axios(options);
   }

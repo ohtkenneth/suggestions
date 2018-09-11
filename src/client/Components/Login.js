@@ -6,7 +6,7 @@ import axios from 'axios';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    console.log('login props', props);
+
     this.state = {
       email: '',
       password: '',
@@ -17,7 +17,7 @@ class Login extends React.Component {
   onLogin() {
     if (this.state.email !== '' && this.state.password !== '') {
       // dispatch action
-      this.props.onLogin(this.state.email, this.state.password);
+      this.props.onLocalLogin(this.state.email, this.state.password);
     } else {
       // enter email and password
       console.log('enter email and password');

@@ -3,7 +3,6 @@ import { Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import history from '../utils/history';
 
-// import VisibleAuthPage from './Containers/VisibleAuthPage';
 import AuthPage from './AuthPage';
 import HomePage from './HomePage';
 // This component ios HoC that prevents the user from accessing a route if he's not logged in

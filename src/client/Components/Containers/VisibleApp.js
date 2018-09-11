@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import App from '../App';
-import { login } from '../actions/actions';
+import { localLogin } from '../actions/localAuthActions';
 
 const mapStateToProps = state => {
   return {
@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onLogin(email, password) {
-      dispatch(login(email, password));
+      dispatch(localLogin(email, password));
     } 
   };
 }
