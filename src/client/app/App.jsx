@@ -3,12 +3,12 @@ import { Router, Link, Redirect, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import history from '../utils/history';
 
-import AuthPage from './AuthPage';
-import HomePage from './HomePage';
+import AuthPage from './auth/AuthPage';
+import HomePage from './home/HomePage';
 // This component ios HoC that prevents the user from accessing a route if he's not logged in
 import PrivateRoute from './PrivateRoute';
 
-import './styles/App.css';
+import './App.css';
 
 const App = (props) => {
   console.log(props);
@@ -25,7 +25,7 @@ const App = (props) => {
         </Switch>
       </div>
     </Router>
-  )
+  );
 }
 
 export default App;

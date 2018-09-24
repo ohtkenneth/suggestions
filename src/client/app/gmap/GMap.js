@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './styles/Map.css';
+import './styles/GMap.css';
 
-export default class Map extends React.Component {
+export default class GMap extends React.Component {
   constructor(props) {
     super(props);
 

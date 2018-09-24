@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchGridCardItem from './SearchGridCardItem';
+import SearchGridCardItem from '../shared/GridCardItem';
 import './styles/CategoryCard.css';
 
 // category: string, items: []

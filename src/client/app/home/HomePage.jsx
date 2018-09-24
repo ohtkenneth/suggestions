@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Redirect, Route } from 'react-router-dom';
 import axios from 'axios';
 // import Search from './Search';
-import VisibleSearch from './Containers/VisibleSearch';
+import VisibleSearch from '../search/ducks/VisibleSearch';
 
 import SavedList from './SavedList';
 import CategoryGrid from './SearchGrid';

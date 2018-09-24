@@ -1,5 +1,5 @@
-import user from '../../utils/user';
-import history from '../../utils/history';
+import user from '../../../../utils/user';
+import history from '../../../../utils/history';
 
 function loginStart(email) {
   return {

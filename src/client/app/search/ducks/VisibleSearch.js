@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Search from '../Search';
-import { yelpSearch } from '../actions/yelpApiActions';
+import { yelpSearch } from '../../actions/yelpApiActions';
 
 const mapStateToProps = state => {
   return {

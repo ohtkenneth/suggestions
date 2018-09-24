@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 // import Login from './Login';
-import VisibleLogin from './Containers/VisibleLogin';
-import Signup from './Signup';
+import VisibleLogin from './login/dux/VisibleLogin';
+import Signup from './signup/Signup';
 
 const AuthPage = (props) => {
   return (

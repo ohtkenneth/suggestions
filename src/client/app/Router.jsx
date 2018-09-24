@@ -6,7 +6,7 @@ import App from './oldApp';
 import Login from './Login';
 import Signup from './Signup';
 import './styles/Router.css';
-import AuthPage from './AuthPage';
+import AuthPage from './auth/Auth';
 
 class Router extends React.Component { 
   constructor(props) {

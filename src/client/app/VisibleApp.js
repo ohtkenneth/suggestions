@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import App from '../App';
-import { localLogin } from '../actions/localAuthActions';
+import { localLogin } from './auth/login/ducks/localAuthActions';
+import App from './App.jsx';
 
 const mapStateToProps = state => {
   return {

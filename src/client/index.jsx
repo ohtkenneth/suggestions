@@ -7,10 +7,10 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
-import { checkIsLoggedInDone, checkIsLoggedInFailure } from './Components/actions/checkIsLoggedIn';
+import { checkIsLoggedInDone, checkIsLoggedInFailure } from './app/actions/checkIsLoggedIn';
 import user from './utils/user';
-import combinedReducers from './Components/reducers/combined';
-import VisibleApp from './Components/Containers/VisibleApp';
+import combinedReducers from './app/reducers/combined';
+import VisibleApp from './app/VisibleApp';
 import history from './utils/history';
 
 const loggerMiddleware = createLogger();

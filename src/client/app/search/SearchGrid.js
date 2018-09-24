@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchGridCard from './SearchGridCard';
+import SearchGridCard from '../search/SearchGridCardGridCard';
 import './styles/CategoryGrid.css';
 
 // searches is an object of objects { searchTerm: { businesses, region, total }}

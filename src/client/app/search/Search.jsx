@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import CategoryGrid from './SearchGrid';
+import Grid from '../shared/Grid';
 
 class Search extends React.Component {
   constructor(props) {
@@ -73,7 +73,7 @@ class Search extends React.Component {
           </div>
         </form>
         <div>
-          <CategoryGrid searches={ this.props.searches}/>
+          <Grid searches={ this.props.searches}/>
         </div>
       </div>
     )
